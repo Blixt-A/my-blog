@@ -17,24 +17,18 @@ export default function BlogPost() {
       console.log(error)
     }
   })
-
-
   /* Use this slug to fetch the post from the database */
   const { slug } = router.query;
   const { data: { data: post = {} } = {}, error } = useSWR(slug ? `${postCacheKey}${slug}` : null, () => getPost({ slug }));
-  
 
-  const handleDeletePost = async () => {
-    console.log({ id: data.id });
+  const handleDeletePost = async (id) => {
+    // console.log({ id: data.id });
 
-
-
-    
     const { status, error } = await deleteTrigger(id);
     
-    // if (!error) {
-      //   router.push(`/blog/${slug}`) 
-      //  }
+    if (!error) {
+        router.push("/blog") 
+       }
   }
 
   const handleEditPost = () => {

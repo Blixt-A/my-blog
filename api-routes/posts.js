@@ -34,7 +34,7 @@ export const removePost = async (id) => {
 
   const { error, status } = await supabase
   .from("post")
-  .delete()
+  .delete(id)
   .select()
   .single() //Tar automatiskt bort arrayen och returnerar ett object
   .eq("id", id);
