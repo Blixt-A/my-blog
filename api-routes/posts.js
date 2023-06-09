@@ -20,7 +20,6 @@ export const getPost = async ({ slug }) => {
 };
 
 export const addPost = async (_, { arg: newPost}) => {
-
   const { data, error, status } = await supabase
   .from("posts")
   .insert(newPost)
@@ -30,20 +29,24 @@ export const addPost = async (_, { arg: newPost}) => {
   return { data };
 };
 
-export const removePost = async (id) => {
+export const removePost = async (_, {arg: id}) => {
 
-  const { error, status } = await supabase
-  .from("post")
-  .delete(id)
-  .select()
-  .single() //Tar automatiskt bort arrayen och returnerar ett object
-  .eq("id", id);
-
-  return { error, status }
-
-  //Handle remove post here
+  const { data, error, status } = await supabase
+  .from("posts")
+  .delete()
+  .eq("id", postId);
+  
+  return { error, status, data }
 };
 
-export const editPost = () => {
-  //Handle edit post here
+export const editPost = async (_, { arg: updatedPost }) => {
+  const { data, error, status } = await supabase
+  .from("posts")
+  .update(updatedPost)
+  .select()
+  .single()
+  .eq("id", updatedPost.id);
+  console.log(error)
+
+  return { error, status, data };
 };

@@ -21,11 +21,11 @@ export default function BlogPost() {
   const { slug } = router.query;
   const { data: { data: post = {} } = {}, error } = useSWR(slug ? `${postCacheKey}${slug}` : null, () => getPost({ slug }));
 
-  const handleDeletePost = async (id) => {
-    // console.log({ id: data.id });
-
-    const { status, error } = await deleteTrigger(id);
-    
+  const handleDeletePost = async () => {
+    const postId = post.id;
+    console.log(postId)
+    const { status, error } = await deleteTrigger(postId);
+   
     if (!error) {
         router.push("/blog") 
        }
