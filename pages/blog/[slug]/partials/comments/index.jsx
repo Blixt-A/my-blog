@@ -1,5 +1,7 @@
 import styles from "./comments.module.css";
 import Comment from "../comment";
+import useSWR from "swr";
+import { getComments, commentsCacheKey } from "../../../../../api-routes/comments";
 
 const mockData = [
   {
@@ -17,15 +19,19 @@ const mockData = [
 ];
 
 export default function Comments({ postId }) {
-  /* 
-  Here is a good place to fetch the comments from the database that has a 
-  foreign key relation to the post.
-  */
+  console.log(postId)
+  
+  const { 
+    data: { data = [] } = {}, 
+  } = useSWR(
+    postId ? commentsCacheKey : null, 
+    () => getComments(postId)
+  );
 
   return (
     <div className={styles.container}>
       <h2>Comments</h2>
-      {mockData.map((comment) => (
+      {data.map((comment) => (
         <Comment key={comment.id} {...comment} />
       ))}
     </div>

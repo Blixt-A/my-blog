@@ -3,7 +3,6 @@ import { createSlug } from "@/utils/createSlug";
 import { addPost, postCacheKey } from "../../api-routes/posts";
 import { useRouter } from "next/router";
 import useSWRMutation from "swr/mutation";
-import useSwr from "swr";
 
 export default function CreatePost() {
   const router = useRouter();

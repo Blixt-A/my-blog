@@ -1,4 +1,5 @@
 import { supabase } from "../lib/supabaseClient"
+
 export const postCacheKey = "/api/blogs";
 
 export const getPosts = async () => {
@@ -34,7 +35,7 @@ export const removePost = async (_, {arg: id}) => {
   const { data, error, status } = await supabase
   .from("posts")
   .delete()
-  .eq("id", postId);
+  .eq("id", id);
   
   return { error, status, data }
 };
