@@ -12,8 +12,15 @@ export const getComments =  async (postId) => {
   //Handle get all comments
 };
 
-export const addComment = () => {
-  //Handle add comment here
+export const addComment = async (_, {arg: newComment}) => {
+  const { data, error, status } = await supabase
+  .from("comments")
+  .insert(newComment)
+  .select()
+  .single()
+  .eq("post_id", newComment.postId)
+ 
+  return { data, error, status }
 };
 
 export const removeComment = () => {
