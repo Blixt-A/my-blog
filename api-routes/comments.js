@@ -23,6 +23,15 @@ export const addComment = async (_, {arg: newComment}) => {
   return { data, error, status }
 };
 
-export const removeComment = () => {
-  //Handle remove comment here
+export const removeComment = async (_, { arg: id }) => {
+  const { data, error, status } = await supabase
+  .from("comments")
+  .delete(id)
+  .single()
+  .eq("id", id)
+
+  return {data, error, status}
 };
+
+
+

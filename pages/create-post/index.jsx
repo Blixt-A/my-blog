@@ -22,20 +22,22 @@ export default function CreatePost() {
       title: titleInput,
       slug,
       user_id: user.id,
-    }
-    
-    const {status, error} = await addTrigger(newPost);
-    console.log({ status, error })
+      image,
+    };
+
+    const { status, error } = await addTrigger(newPost);
     if (!error) {
      router.push(`/blog/${slug}`) 
     }
   };
   
   return (
-    <BlogEditor
-      heading="Create post"
-      onSubmit={handleOnSubmit}
-      buttonText="Upload post"
-    />
+    <>
+      <BlogEditor
+        heading="Create post"
+        onSubmit={handleOnSubmit}
+        buttonText="Upload post"
+      />
+    </>
   );
 }
