@@ -44,9 +44,9 @@ export const addPost = async (_, { arg: newPost}) => {
 export const removePost = async (_, {arg: id}) => {
 
   const { data, error, status } = await supabase
-  .from("posts")
-  .delete()
-  .eq("id", id);
+    .from("posts")
+    .delete()
+    .eq("id", id);
   
   return { error, status, data }
 };
